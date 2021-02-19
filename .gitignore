@@ -131,4 +131,7 @@ dmypy.json
 .pyre/
 quote_machine.py
 .gitignore
+<<<<<<< HEAD
 
+=======
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9

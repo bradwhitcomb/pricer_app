@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from tkinter import Label, Entry, Button, StringVar, Text, ttk
+=======
+from tkinter import Label, Entry, Button, StringVar, OptionMenu, Text, ttk
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
 import smtplib
 import cred
 
@@ -6,7 +10,10 @@ import cred
 global quote_dict
 quote_dict = {}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
 def create_widgets(self):
         x = 120
         y = 30
@@ -16,6 +23,13 @@ def create_widgets(self):
 
         px = 2
         py = 1
+<<<<<<< HEAD
+=======
+
+
+        
+        
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
        
         """ Create input boxes """
 
@@ -61,7 +75,11 @@ def create_widgets(self):
           "Augusta Sportswear",
           "Badger",
           "Bella+Canvas",
+<<<<<<< HEAD
           "Champion",
+=======
+          "Champion" ,
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
           "Columbia",
           "Comfort Colors",
           "Core",
@@ -110,8 +128,13 @@ def create_widgets(self):
                 "Visor",
                 "V-neck",
                 "Warm-up",
+<<<<<<< HEAD
                 "Other"
 
+=======
+                "Other"   
+     
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
         ]
 
         self.product = StringVar()
@@ -124,11 +147,20 @@ def create_widgets(self):
         self.input_canvas.create_window(x+75, y+340, window=self.description)
         self.description.insert('1.0', 'Comments:')
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
         """ Create entry input boxes """
         self.customer_var = StringVar()
         self.entry_client = Entry(self.input_canvas, bg = "white", fg = "black", textvariable=self.customer_var)
         self.input_canvas.create_window(x+200, y, window=self.entry_client)
 
+<<<<<<< HEAD
+=======
+       
+>>>>>>> e4151c20420bbac9b04fbf4811f07232aba3ceb9
         self.quantity_var = StringVar()
         self.entry_quantity = Entry(self.input_canvas, bg = "white", fg = "black", textvariable=self.quantity_var)
         self.input_canvas.create_window(x+200, y+30, window=self.entry_quantity)
