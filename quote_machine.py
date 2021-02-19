@@ -6,7 +6,7 @@ from tkinter import Canvas, END
 import smtplib
 import datetime
 import cred
-from widgets import create_widgets, create_quote, save_quote
+from widgets import create_widgets
 import sqlite3
 
 """
@@ -18,8 +18,8 @@ for the quote email and the quote DB in sqlite3
 global quote_dict
 quote_dict = {}
 
-class Root(tk.Tk):
 
+class Root(tk.Tk):
 
     def __init__(self):
         super().__init__()
@@ -62,9 +62,9 @@ class Root(tk.Tk):
         product = self.product.get()
         comments = self.description.get("1.0", END).strip()
 
-        
-        """In the pricer_a dict the keys are the number of colors to print.  In the values x represents
-           the quantity to print.  The conditional calculates price based on number of colors and x
+        """In the pricer_a dict the keys are the number of colors to print.
+           In the values x represents the quantity to print.
+           The conditional calculates price based on number of colors and x
         """
         pricer_a = {
             0:0,
@@ -86,11 +86,9 @@ class Root(tk.Tk):
             6: 1.35 if x >= 1200 else 1.45 if x >= 480 else 1.7 if x >= 240 else 1.85 if x >= 180 else 2.2
              if x >= 120 else None if x >= 60 else None if x >= 36 else None if x >= 12 else None
 
-            
         }
 
         # print(x, price, front_colors, back_colors, setup, markup, art, flash)
-        
         front_cost = pricer_a[front_colors]
         back_cost = pricer_a[back_colors]
         total_cost = (x * (price + front_cost + back_cost + flash)) + setup + art
@@ -98,7 +96,6 @@ class Root(tk.Tk):
         total_quote = total_cost + margin
         quote_per_unit = total_quote/x
 
-        
         """Creates output labels"""
         self.label_totalquote["text"] = f"TOTAL QUOTE: ${total_quote:,.2f}"
         self.label_itemquote["text"] = f"QUOTE PER ITEM: ${quote_per_unit:,.2f}"
@@ -112,47 +109,34 @@ class Root(tk.Tk):
         quote_date = datetime.datetime.today()
         quote_date = str(quote_date)
         quote_date = quote_date[0:16]
-        
-
-  
-        quote_dict["Total_Quote"] =  total_quote
-        quote_dict["Quote_per_Item"] =  quote_per_unit
-        quote_dict["Cost_per_Unit"] =  total_cost/x
-        quote_dict["Profit_per_Unit"] =  margin/x
+        quote_dict["Total_Quote"] = total_quote
+        quote_dict["Quote_per_Item"] = quote_per_unit
+        quote_dict["Cost_per_Unit"] = total_cost/x
+        quote_dict["Profit_per_Unit"] = margin/x
         quote_dict["Cost"] =  total_cost
-        quote_dict["Total_Profit"] =  margin
-        quote_dict["Front_Print_Charge"] =  front_cost
-        quote_dict["Back_Print_Charge"] =  back_cost
-        quote_dict["Client_Name"] =  customer
-        quote_dict["Quantity_to_Print"] =  x
-        quote_dict["Price_of_Item"] =  price
-        quote_dict["Front_Colors"] =  front_colors
-        quote_dict["Back_Colors"] =  back_colors
-        quote_dict["Markup"] =  markup
-        quote_dict["Setup"] =  setup
-        quote_dict["Art"] =  art
-        quote_dict["Flash"] =  flash
+        quote_dict["Total_Profit"] = margin
+        quote_dict["Front_Print_Charge"] = front_cost
+        quote_dict["Back_Print_Charge"] = back_cost
+        quote_dict["Client_Name"] = customer
+        quote_dict["Quantity_to_Print"] = x
+        quote_dict["Price_of_Item"] = price
+        quote_dict["Front_Colors"] = front_colors
+        quote_dict["Back_Colors"] = back_colors
+        quote_dict["Markup"] = markup
+        quote_dict["Setup"] = setup
+        quote_dict["Art"] = art
+        quote_dict["Flash"] = flash
         quote_dict["Time_Stamp"] = quote_date
         quote_dict["Brand"] = brand
         quote_dict["Product"] = product
         quote_dict["Comments"] = comments
 
-
-
         return quote_dict
-        
-       
-        
 
 # #         """ to create app 
 # #         pyinstaller --onefile --add-binary="/System/Library/Frameworks/Tk.framework/Tk":"tk" --add-binary="/System/Library/Frameworks/Tcl.framework/Tcl":"tcl" name_of_file.py """
-
-
-
     def save_quote(self):
 
-        
-        
         password = cred.password
 
         with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
@@ -165,7 +149,6 @@ class Root(tk.Tk):
             smtp.login('acapella.design670@gmail.com', password)
             subject = f"This is the quote for: {quote_dict['Client_Name']}"
             body = f"""
-            
             TIME STAMP: {quote_dict['Time_Stamp']}
             CLIENT: {quote_dict['Client_Name']}
 
@@ -192,10 +175,7 @@ class Root(tk.Tk):
             Product: {quote_dict['Product']}
 
             Comments:{quote_dict['Comments']}
-            
             """
-
-                
             msg = f"Subject:  {subject}\n\n{body}"
             smtp.sendmail('EMAIL_ADDRESS', 'marty@acapella-design.com', msg)
         """Sets up the sqlite3 object"""
@@ -210,7 +190,7 @@ class Root(tk.Tk):
                         Quantity integer,
                         Price real,
                         Quote real,
-                        Cost real, 
+                        Cost real,
                         Profit real,
                         Item_quote real,
                         Item_cost real,
@@ -226,7 +206,6 @@ class Root(tk.Tk):
                         Brand text,
                         Product text,
                         Comments text
-                        
 
                         )""")
         with conn:
@@ -238,14 +217,7 @@ class Root(tk.Tk):
                           f'${quote_dict["Back_Print_Charge"]:,.02f}', quote_dict["Front_Colors"], quote_dict["Back_Colors"], f'{quote_dict["Markup"]:,.02f}%', f'${quote_dict["Setup"]:,.02f}',
                           f'${quote_dict["Art"]:,.02f}', f'${quote_dict["Flash"]:,.02f}', f'{quote_dict["Brand"]}', f'{quote_dict["Product"]}', f'{quote_dict["Comments"]}'
 
-                      }""" )
-
-                      
-    
-        
-   
-
-    
+                      }""")
 
 
 if __name__ == "__main__":
