@@ -113,7 +113,7 @@ class Root(tk.Tk):
         quote_dict["Quote_per_Item"] = quote_per_unit
         quote_dict["Cost_per_Unit"] = total_cost/x
         quote_dict["Profit_per_Unit"] = margin/x
-        quote_dict["Cost"] =  total_cost
+        quote_dict["Cost"] = total_cost
         quote_dict["Total_Profit"] = margin
         quote_dict["Front_Print_Charge"] = front_cost
         quote_dict["Back_Print_Charge"] = back_cost
